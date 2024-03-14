@@ -42,7 +42,7 @@ public class GlobalExceptionHandlingMiddleware
         };
 
         context.Response.ContentType = "application/json";
-        context.Response.StatusCode =  (int)HttpStatusCode.InternalServerError;
+        context.Response.StatusCode = (int)response.StatusCode;
         await context.Response.WriteAsJsonAsync(response);
     }
 }
