@@ -15,14 +15,12 @@ public class RequestLoggingMiddleware
     public async Task InvokeAsync(HttpContext context, ILogger<RequestLoggingMiddleware> logger)
     {
         var request = context.Request;
-
-        logger.LogInformation(
-                $"Request=>Timestamp:{DateTime.Now.ToLocalTime()} |" +
-                $" Method: {request.Method} | " +
-                $" Path: {request.Path} | " +
-                $"Query params:{GetQueryParams(request.Query)} | " +
-                $"Headers:{GetHeaders(request.Headers)}"
-                );
+        var logMsg = $"Request date/time=> Timestamp:{DateTime.Now.ToLocalTime()} \n" +
+                $"Method=> {request.Method} \n " +
+                $"Path=> {request.Path} \n " +
+                $"Query params=> {GetQueryParams(request.Query)} \n " +
+                $"Headers=> {GetHeaders(request.Headers)}";
+        logger.LogInformation(logMsg );
         await _next(context);
     }
      
@@ -35,7 +33,7 @@ public class RequestLoggingMiddleware
             .ToList()
             .ForEach(x =>
               {
-                headers += x.Key + "=" + x.Value + ";";
+                headers += x.Key + "=" + x.Value + "; ";
               });
         return headers;
     }  
@@ -46,7 +44,7 @@ public class RequestLoggingMiddleware
             .ToList()
             .ForEach(x =>
                {
-                 queryParams += x.Key + "=" + x.Value + ";";
+                 queryParams += x.Key + "=" + x.Value + "; ";
                });
         return queryParams;
     }   
