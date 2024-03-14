@@ -5,17 +5,20 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using VikiSense_interview.Extension_Methods;
 
 namespace VikiSense_interview.Middlewares;
 public class CustomResponseCompressionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly int _compressionThreshold;
+    private readonly string _compressionLevel;
 
     public CustomResponseCompressionMiddleware(RequestDelegate next, IConfiguration config)
     {
         _next = next;
         _compressionThreshold = config.GetValue<int>("CompressionThreshold");
+        _compressionLevel = config.GetValue<string>("CompressionLevel");
     }
 
     public async Task Invoke(HttpContext context)
@@ -40,7 +43,7 @@ public class CustomResponseCompressionMiddleware
                 {
                     if (acceptEncoding.Contains("gzip"))
                     {
-                        using (var gzipStream = new GZipStream(compressedStream, CompressionLevel.Optimal, true))
+                        using (var gzipStream = new GZipStream(compressedStream, _compressionLevel.ToCompressionLevel(), true))
                         {
                             await memoryStream.CopyToAsync(gzipStream);
                             gzipStream.Close();
@@ -52,7 +55,7 @@ public class CustomResponseCompressionMiddleware
                     }
                     else if (acceptEncoding.Contains("br"))
                     {
-                        using (var brotliStream = new BrotliStream(compressedStream, CompressionLevel.Optimal, true))
+                        using (var brotliStream = new BrotliStream(compressedStream, _compressionLevel.ToCompressionLevel(), true))
                         {
                             await memoryStream.CopyToAsync(brotliStream);
                             brotliStream.Close();
