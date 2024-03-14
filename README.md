@@ -3,7 +3,7 @@
 
 
 ## Instruction
-
+The base URL is   ```http://localhost:5193```
 I used Visual Studio project template which already has ``WeatherForecastController`` and some endpoints to start with.
 - See the application console for logs and exception details (this prevents showing sensitive information and unfriendly errors to the client)
 - To see query params logging, go to ```/WeatherForecast/summaries?itemsCount=6```
