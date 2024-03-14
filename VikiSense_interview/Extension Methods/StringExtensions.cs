@@ -14,7 +14,7 @@ namespace VikiSense_interview.Extension_Methods
         {
             if (!Enum.TryParse<CompressionLevel>(value, out CompressionLevel result))
             {
-                return CompressionLevel.Optimal;
+                throw new Exception("Invalid compression level specified");
             }
             return result;
         }

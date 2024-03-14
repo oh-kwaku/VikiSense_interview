@@ -12,7 +12,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline. 
 
 app.UseHttpsRedirection();
-//app.UseResponseCompression();
 app.UseCustomResponseCompressionMiddleware();
 app.UseRequestLoggingMiddleware();
 app.UseCustomErrorHandlingMiddleware();
