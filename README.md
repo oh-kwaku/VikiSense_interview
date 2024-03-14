@@ -16,3 +16,5 @@ I check the size of the response and if it's higher than the threshold then comp
 
 In the ```GlobalExceptionHandlingMiddleware``` class,  I check the exception type to determine the proper error message to show. A generic error message is shown for unhandled/unknown exception types.
 
+To make the ```Program.cs``` file cleaner and to be consistent with how built-in middleware is used, I added extension methods for each middleware to follow ```app.Use*``` pattern. Example: ```app.UseCustomResponseCompressionMiddleware();
+```, ```app.UseRequestLoggingMiddleware()```, ```app.UseCustomErrorHandlingMiddleware()```
