@@ -17,7 +17,7 @@ public class RequestLoggingMiddleware
         var request = context.Request;
 
         logger.LogInformation(
-                $"Request=>Timestamp:{DateTime.Now.ToLongTimeString()} |" +
+                $"Request=>Timestamp:{DateTime.Now.ToLocalTime()} |" +
                 $" Method: {request.Method} | " +
                 $" Path: {request.Path} | " +
                 $"Query params:{GetQueryParams(request.Query)} | " +

@@ -29,5 +29,33 @@ namespace VikiSense_interview.Controllers
             })
             .ToArray();
         }
+
+        /// <summary>
+        /// Get summaries: Just to simulate query string logging
+        /// </summary>
+        /// <param name="itemsCount"></param>
+        /// <returns></returns>
+
+        [HttpGet("summaries")]
+        public IEnumerable<string> GetSummaries(int itemsCount=5)
+        {
+
+            return Summaries
+                .Take(itemsCount)
+                .ToList();
+        }
+
+        /// <summary>
+        /// Just to 
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <returns></returns>
+        [HttpGet("summaries/{idx}")]
+        public string GetSummary(int idx)
+        {
+
+            return Summaries[idx];
+                 
+        }
     }
 }

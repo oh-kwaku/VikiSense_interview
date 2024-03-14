@@ -34,6 +34,7 @@ public class GlobalExceptionHandlingMiddleware
 
         ExceptionResponse response = exception switch
         {
+            IndexOutOfRangeException _ => new ExceptionResponse(HttpStatusCode.BadRequest, "The specified index is not valid."),
             ApplicationException _ => new ExceptionResponse(HttpStatusCode.BadRequest, "Application exception occurred."),
             KeyNotFoundException _ => new ExceptionResponse(HttpStatusCode.NotFound, "The requested key not found."),
             UnauthorizedAccessException _ => new ExceptionResponse(HttpStatusCode.Unauthorized, "Unauthorized."),
