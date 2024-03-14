@@ -18,3 +18,5 @@ In the ```GlobalExceptionHandlingMiddleware``` class,  I check the exception typ
 
 To make the ```Program.cs``` file cleaner and to be consistent with how built-in middleware is used, I added extension methods for each middleware to follow ```app.Use*``` pattern. Example: ```app.UseCustomResponseCompressionMiddleware();
 ```, ```app.UseRequestLoggingMiddleware()```, ```app.UseCustomErrorHandlingMiddleware()```
+
+I added ```CompressionLevel``` to the configuration and also created an extension method on string to convert it to ```CompressionLevel``` enum. This makes it easier to switch compression level without recompiling the app.
