@@ -11,27 +11,19 @@ builder.Services.AddControllers();
 
 builder.Services.AddResponseCompression(options =>
 {
-    //options.EnableForHttps = true;
-    //options.Providers.Add<BrotliCompressionProvider>();
-    //options.Providers.Add<GzipCompressionProvider>();
     options.Providers.Add<CustomCompressionProvider>();
     options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json", "application/xml" });
-    
+
 });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline. 
 
-app.UseResponseCompression();
 app.UseHttpsRedirection();
-
-
-//app.UseCustomErrorHandlingMiddleware();
+//app.UseResponseCompression();
+app.UseCustomResponseCompressionMiddleware();
 app.UseRequestLoggingMiddleware();
 app.UseCustomErrorHandlingMiddleware();
 app.MapControllers();
-
- 
- 
 
 app.Run();
