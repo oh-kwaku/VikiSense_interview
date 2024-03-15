@@ -1,10 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Net.Http.Headers;
-using System.IO;
+﻿using Microsoft.Net.Http.Headers;
 using System.IO.Compression;
-using System.Linq;
-using System.Threading.Tasks;
 using VikiSense_interview.Extension_Methods;
 
 namespace VikiSense_interview.Middlewares;
@@ -77,6 +72,8 @@ public class CustomResponseCompressionMiddleware
         }
     }
 
+
+    
     private bool IsContentTypeSupported(HttpResponse response)
     {
         var supportedContentTypes = new List<string>
